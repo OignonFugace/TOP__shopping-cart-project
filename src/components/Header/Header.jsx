@@ -1,14 +1,14 @@
 import { FlexBox } from "@ui5/webcomponents-react";
-import Logo from "../Logo/Logo";
-import NavigationMenu from "../NavigationMenu/NavigationMenu";
-import SearchBar from "../SearchBar/SearchBar";
+import { Logo, NavigationMenu, SearchBar, CartWidget } from "../../components";
+import "./Header.css";
 
 function Header() {
 	return (
-		<FlexBox>
+		<FlexBox className="header" justifyContent="SpaceBetween" alignItems="Center">
 			<Logo />
 			<NavigationMenu />
 			<SearchBar />
+			<CartWidget />
 		</FlexBox>
 	);
 }

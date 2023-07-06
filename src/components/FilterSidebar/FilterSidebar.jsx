@@ -1,7 +1,8 @@
+import { Text } from "@ui5/webcomponents-react";
 
 function FilterSidebar() {
 	return (
-	 <div>SIDEBAR</div>
+	 <Text>SIDEBAR</Text>
 	);
 }
 

@@ -4,9 +4,10 @@ import { NavLink } from "../../components";
 function NavigationMenu() {
 
   return (
-    <FlexBox style={{ gap: "1rem" }}>
+    <FlexBox style={{ gap: "2rem" }}>
       <NavLink to={"/"}>Home</NavLink>
       <NavLink to={"/store"}>Store</NavLink>
+      <NavLink to={"/contact"}>Contact</NavLink>
     </FlexBox>
   );
 }

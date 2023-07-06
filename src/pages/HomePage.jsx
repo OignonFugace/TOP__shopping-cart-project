@@ -1,7 +1,8 @@
+import { Text } from "@ui5/webcomponents-react";
 
 function HomePage() {
 	return (
-		<div>HOME PAGE</div>
+		<Text>HOME PAGE</Text>
 	);
 }
 
