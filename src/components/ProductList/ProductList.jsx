@@ -12,7 +12,10 @@ function ProductList() {
   return (
     <div className="product-list">
       {products.map((product) => (
-        <ProductCard key={product.id} id={product.id} />
+        <ProductCard
+          key={product.id}
+          id={product.id}
+        />
       ))}
     </div>
   );

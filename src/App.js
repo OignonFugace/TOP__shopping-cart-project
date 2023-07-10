@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import { StorePage, HomePage, ContactPage, CartPage } from "./pages";
+import { StorePage, HomePage, ContactPage, CartPage, ProductPage } from "./pages";
 import { Header, Footer } from "./components";
 
 function App() {
@@ -13,6 +13,7 @@ function App() {
         <Route path="/store" element={<StorePage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/product/:id" element={<ProductPage />} />
       </Routes>
       <Footer />
     </div>

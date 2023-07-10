@@ -1,5 +1,5 @@
+import { Text, Title } from "@ui5/webcomponents-react";
 import useProductData from "../../hooks/useProductData";
-import { Text } from "@ui5/webcomponents-react";
 
 function ProductDetails({ id }) {
 	const { data: product, loading, error } = useProductData(id);
@@ -9,9 +9,9 @@ function ProductDetails({ id }) {
 
 	return (
 		<div>
-			<h2>{product.title}</h2>
-			<p>{product.description}</p>
-			<p>{product.price}$</p>
+			<Title wrappingType="Normal">{product.title}</Title>
+			<Text>{product.description}</Text>
+			<Text>${product.price}</Text>
 		</div>
 	);
 }

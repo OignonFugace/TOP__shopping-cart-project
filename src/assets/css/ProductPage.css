@@ -1,0 +1,8 @@
+
+.product-page {
+	max-width: 1300px;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 22rem 3fr 2fr;
+	gap: 3rem;
+}

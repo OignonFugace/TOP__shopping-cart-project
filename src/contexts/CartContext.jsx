@@ -17,35 +17,49 @@ function cartReducer(state, action) {
     case ADD_PRODUCT_TO_CART: {
       return {
         ...state,
+        products: [
+          ...state.products,
+          { id: action.payload.id, quantity: action.payload.quantity },
+        ],
       };
     }
 
     case REMOVE_PRODUCT_FROM_CART: {
       return {
         ...state,
+        products: state.products.filter(product => product.id !== action.payload.id),
       };
     }
 
     case CLEAR_CART: {
       return {
         ...state,
+        products: [],
       };
     }
 
     case UPDATE_QUANTITY: {
       return {
         ...state,
+        products: state.products.map((product) => {
+          return product.id === action.payload.id
+            ? {
+                ...product,
+                quantity: product.quantity + action.payload.operand,
+              }
+            : product;
+        }),
       };
     }
 
     case LOAD_CART: {
       return {
         ...state,
-				productIdList: action.payload.productList,
-				totalItems: action.payload.totalItems,
-				totalPrice: action.payload.totalPrice,
-				orderStatus: action.payload.orderStatus,
-				promoCode: action.payload.promoCode,
+        products: action.payload.products,
+        totalItems: action.payload.totalItems,
+        totalPrice: action.payload.totalPrice,
+        orderStatus: action.payload.orderStatus,
+        promoCode: action.payload.promoCode,
       };
     }
 
@@ -62,7 +76,10 @@ function cartReducer(state, action) {
 
 function CartContextProvider({ children }) {
   const initialState = {
-    productIdList: ["foo", "bar"],
+    products: [
+      { id: 1, quantity: 1 },
+      { id: 5, quantity: 1 },
+    ],
     totalItems: 0,
     totalPrice: 0,
     orderStatus: "",
@@ -73,14 +90,21 @@ function CartContextProvider({ children }) {
     "cartState",
     initialState
   );
-  const [state, dispatch] = useReducer(cartReducer, localStorageState || initialState);
+  const [state, dispatch] = useReducer(
+    cartReducer,
+    localStorageState || initialState
+  );
 
   useEffect(() => {
-		setLocalStorageState(state);
+    setLocalStorageState(state);
   }, [state]);
 
+  useEffect(() => {
+
+  }, [state.products]);
+
   return (
-    <CartContext.Provider value={{ dispatch, productIdList: state.productIdList }}>
+    <CartContext.Provider value={{ dispatch, products: state.products }}>
       {children}
     </CartContext.Provider>
   );
