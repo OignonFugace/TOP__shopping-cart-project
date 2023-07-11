@@ -1,4 +1,4 @@
-[
+const productsData = [
   {
     "id": 1,
     "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -179,4 +179,6 @@
     "image": "https://fakestoreapi.com/img/61pHAEJ4NML._AC_UX679_.jpg",
     "rating": { "rate": 3.6, "count": 145 }
   }
-]
+];
+
+export default productsData;

@@ -4,32 +4,59 @@ import "./CartProductItem.css";
 import "@ui5/webcomponents-icons/dist/add.js";
 import "@ui5/webcomponents-icons/dist/less.js";
 import "@ui5/webcomponents-icons/dist/delete.js";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import CartContext from "../../contexts/CartContext";
 import {
   REMOVE_PRODUCT_FROM_CART,
   UPDATE_QUANTITY,
 } from "../../utils/contants";
 import { useNavigate, Link } from "react-router-dom";
+import useLocalStorage from "../../hooks/useLocalStorage";
 
 function CartProductItem({ id }) {
   const { data: product, loading, error } = useProductData(id);
   const { dispatch, products: cartProducts } = useContext(CartContext);
   const navigate = useNavigate();
+	const [localStorageLoaded, setLocalStorageLoaded] = useState(false);
+  const [localStorageProducts, setLocalStorageProducts] = useLocalStorage(
+    "products",
+    []
+  );
 
-  if (loading) return <Text>Loading...</Text>;
+  useEffect(() => {
+    if (!loading && product) {
+      setLocalStorageProducts((prevLocalStorageProducts) => {
+        const productExists = prevLocalStorageProducts.some(
+          (localStorageProduct) => localStorageProduct.id === product.id
+        );
+        if (productExists) return prevLocalStorageProducts;
+        return [...prevLocalStorageProducts, product];
+      });
+    }
+		setLocalStorageLoaded(true);
+  }, [product]);
+
+  const finalProduct =
+    error || loading
+      ? localStorageProducts.find(
+          (localStorageProduct) => localStorageProduct.id === id
+        )
+      : product;
+
+  if (loading && !localStorageLoaded) return <Text>Loading...</Text>;
   if (error) return <Text>Error: {error.message}</Text>;
 
-  const itemQuantity = cartProducts.find((product) => product.id === id)
-    .quantity;
+  const itemQuantity = cartProducts.find(
+    (product) => product.id === id
+  ).quantity;
 
   return (
     <div className="cart-product-item">
       <div className="product-info">
         <div className="cart-product-item__image-container">
           <img
-            src={product.image}
-            alt={product.title}
+            src={finalProduct.image}
+            alt={finalProduct.title}
             onClick={() => navigate(`/product/${id}`)}
             style={{ cursor: "pointer" }}
           />
@@ -37,10 +64,10 @@ function CartProductItem({ id }) {
         <FlexBox direction="Column">
           <FlexBox justifyContent="SpaceBetween">
             <Title wrappingType="Normal" className="cart-product-item__title">
-              <Link to={`/product/${id}`}>{product.title}</Link>
+              <Link to={`/product/${id}`} style={{ color: "black" }}>{finalProduct.title}</Link>
             </Title>
             <Text style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
-              ${product.price * itemQuantity}
+              ${finalProduct.price * itemQuantity}
             </Text>
           </FlexBox>
           <Text style={{ textAlign: "right" }}>

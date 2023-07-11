@@ -1,4 +1,3 @@
-import useProductData from "../../hooks/useProductData";
 import "./ProductCard.css";
 import { Button, FlexBox, Text, Title } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/cart-4.js";
@@ -13,20 +12,16 @@ import {
   UPDATE_QUANTITY,
 } from "../../utils/contants";
 
-function ProductCard({ id }) {
+function ProductCard({ product }) {
   const navigate = useNavigate();
-  const { data: product, loading, error } = useProductData(id);
   const { dispatch, products: cartProducts } = useContext(CartContext);
-
-  if (loading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error: {error.message}</Text>;
 
   return (
     <FlexBox
       direction="Column"
       justifyContent="SpaceBetween"
       className="product-card"
-      onClick={() => navigate(`/product/${id}`)}
+      onClick={() => navigate(`/product/${product.id}`)}
     >
       <ProductCardImage src={product.image} title={product.title} />
       <Title
@@ -40,12 +35,12 @@ function ProductCard({ id }) {
       </Title>
       <FlexBox justifyContent="SpaceBetween" alignItems="Center">
         <Text>${product.price}</Text>
-        {cartProducts.find((product) => product.id === id) ? (
+        {cartProducts.find((cartProduct) => cartProduct.id === product.id) ? (
           <Button
             icon="cart-2"
             onClick={(event) => {
               event.stopPropagation();
-              dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: { id: id } });
+              dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: { id: product.id } });
             }}
           >
             Remove
@@ -55,16 +50,16 @@ function ProductCard({ id }) {
             icon="cart-4"
             onClick={(event) => {
               event.stopPropagation();
-              if (cartProducts.find((product) => product.id === id)) {
+              if (cartProducts.find((cartProduct) => cartProduct.id === product.id)) {
                 dispatch({
                   type: UPDATE_QUANTITY,
-                  payload: { id: id, operand: 1 },
+                  payload: { id: product.id, operand: 1 },
                 });
                 return;
               }
               dispatch({
                 type: ADD_PRODUCT_TO_CART,
-                payload: { id: id, quantity: 1 },
+                payload: { id: product.id, quantity: 1 },
               });
             }}
           >
