@@ -1,4 +1,4 @@
-import { Title, Text, StepInput, FlexBox } from "@ui5/webcomponents-react";
+import { Title, StepInput, FlexBox } from "@ui5/webcomponents-react";
 import { useState } from "react";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
 

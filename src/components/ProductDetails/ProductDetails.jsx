@@ -1,10 +1,7 @@
 import { Text, Title } from "@ui5/webcomponents-react";
-import useProductData from "../../hooks/useProductData";
 
-function ProductDetails({ id }) {
-	const { data: product, loading, error } = useProductData(id);
-
-	if (loading) return <Text>Loading...</Text>;
+function ProductDetails({ product, loading, error, localStorageLoaded }) {
+	if (loading && !localStorageLoaded) return <Text>Loading...</Text>;
 	if (error) return <Text>Error: {error.message}</Text>;
 
 	return (

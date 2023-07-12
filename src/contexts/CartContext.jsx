@@ -1,5 +1,6 @@
 import { createContext, useEffect, useReducer } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
+import useAllProducts from "../hooks/useAllProducts";
 
 import {
   ADD_PRODUCT_TO_CART,
@@ -8,6 +9,8 @@ import {
   UPDATE_QUANTITY,
   LOAD_CART,
   CHECKOUT,
+  UPDATE_TOTAL_ITEMS,
+  UPDATE_TOTAL_PRICE,
 } from "../utils/contants";
 
 const CartContext = createContext();
@@ -27,7 +30,9 @@ function cartReducer(state, action) {
     case REMOVE_PRODUCT_FROM_CART: {
       return {
         ...state,
-        products: state.products.filter(product => product.id !== action.payload.id),
+        products: state.products.filter(
+          (product) => product.id !== action.payload.id
+        ),
       };
     }
 
@@ -69,6 +74,28 @@ function cartReducer(state, action) {
       };
     }
 
+    case UPDATE_TOTAL_ITEMS: {
+      const totalItems = state.products.reduce(
+        (acc, product) => acc + product.quantity,
+        0
+      );
+      return {
+        ...state,
+        totalItems: totalItems,
+      };
+    }
+
+    case UPDATE_TOTAL_PRICE: {
+      const totalPrice = state.products.map(product => {
+        const productPrice = action.payload.products.find(item => item.id === product.id).price;
+        return productPrice * product.quantity;
+      }).reduce((acc, price) => acc + price, 0);
+      return {
+        ...state,
+        totalPrice: totalPrice,
+      }
+    }
+
     default:
       throw new Error("Invalid action type: " + action.type);
   }
@@ -95,16 +122,35 @@ function CartContextProvider({ children }) {
     localStorageState || initialState
   );
 
+  const { data: products, loading, error } = useAllProducts();
+  const [localStorageProducts, setLocalStorageProducts] = useLocalStorage("products", []);
+
+  useEffect(() => {
+    if (!loading && products && products.length > 0) {
+      setLocalStorageProducts(products);
+    }
+  }, [products]);
+
+  const finalProducts = error || loading ? localStorageProducts : products;
+
   useEffect(() => {
     setLocalStorageState(state);
   }, [state]);
 
   useEffect(() => {
-
+    dispatch({ type: UPDATE_TOTAL_ITEMS });
+    dispatch({ type: UPDATE_TOTAL_PRICE, payload: { products: finalProducts } });
   }, [state.products]);
 
   return (
-    <CartContext.Provider value={{ dispatch, products: state.products }}>
+    <CartContext.Provider
+      value={{
+        dispatch,
+        products: state.products,
+        totalItems: state.totalItems,
+        totalPrice: state.totalPrice,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );

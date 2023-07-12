@@ -1,10 +1,8 @@
-import useProductData from "../../hooks/useProductData";
 import { Text, MediaGallery, MediaGalleryItem } from "@ui5/webcomponents-react";
 
-function ProductImageGallery({ id }) {
-  const { data: product, loading, error } = useProductData(id);
+function ProductImageGallery({ product, loading, error, localStorageLoaded }) {
 
-  if (loading) return <Text>Loading...</Text>;
+  if (loading && !localStorageLoaded) return <Text>Loading...</Text>;
   if (error) return <Text>Error: {error.message}</Text>;
 
   return (

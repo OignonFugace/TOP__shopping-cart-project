@@ -4,3 +4,5 @@ export const CLEAR_CART = "CLEAR_CART";
 export const UPDATE_QUANTITY = "UPDATE_QUANTITY";
 export const LOAD_CART = "LOAD_CART";
 export const CHECKOUT = "CHECKOUT";
+export const UPDATE_TOTAL_ITEMS = "UPDATE_TOTAL_ITEMS";
+export const UPDATE_TOTAL_PRICE = "UPDATE_TOTAL_PRICE";

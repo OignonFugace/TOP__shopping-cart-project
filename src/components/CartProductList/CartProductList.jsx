@@ -1,10 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import CartContext from "../../contexts/CartContext";
 import { CartProductItem } from "../../components";
 import "./CartProductList.css";
 import { FlexBox } from "@ui5/webcomponents-react";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import useProductData from "../../hooks/useProductData";
 
 function CartProductList() {
   const { products: cartProducts } = useContext(CartContext);
