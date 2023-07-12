@@ -6,3 +6,16 @@
 	max-width: 800px;
 	margin: 0 auto;
 }
+
+.cart-page .empty-cart {
+	max-width: 500px;
+	border: 1px solid black;
+	border-radius: 4px;
+	padding: 3rem;
+	text-align: center;
+	margin: 0 auto;
+}
+
+.cart-page .empty-cart__page {
+	font-size: 1.1rem;
+}

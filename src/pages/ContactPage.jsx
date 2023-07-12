@@ -2,8 +2,11 @@ import { Title, Text, Button, Icon } from "@ui5/webcomponents-react";
 import "../assets/css/ContactPage.css";
 import "@ui5/webcomponents-icons/dist/headset.js";
 import "@ui5/webcomponents-icons/dist/sys-help.js";
+import { useNavigate } from "react-router-dom";
 
 function ContactPage() {
+  const navigate = useNavigate();
+
   return (
     <div className="contact-page">
       <Title className="contact-page__title">Contact US</Title>
@@ -23,7 +26,12 @@ function ContactPage() {
               issues you might encounter.
             </Text>
           </div>
-          <Button>Live Chat</Button>
+          <Button
+            className="contact-card__button"
+            onClick={() => navigate("live-chat")}
+          >
+            Live Chat
+          </Button>
         </div>
         <div className="contact-card">
           <div>
@@ -41,7 +49,12 @@ function ContactPage() {
               and help you out.
             </Text>
           </div>
-          <Button className="contact-card__button">Go To Help Center</Button>
+          <Button
+            className="contact-card__button"
+            onClick={() => navigate("help-center")}
+          >
+            Go To Help Center
+          </Button>
         </div>
       </div>
     </div>

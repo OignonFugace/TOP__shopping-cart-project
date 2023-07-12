@@ -1,0 +1,26 @@
+
+.not-found-page .not-found-page__card {
+	margin: 5rem auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	max-width: 500px;
+	border: 1px solid black;
+	border-radius: 4px;
+	padding: 3rem;
+	text-align: center;
+}
+
+.not-found-page .not-found-page__title {
+	font-size: 4rem;
+	color: #0a6ed1;
+}
+
+.not-found-page .not-found-page__text {
+	font-size: 1.2rem;
+}
+
+.not-found-page .not-found-page__text span {
+	color: #f44444;
+	font-weight: bold;
+}
