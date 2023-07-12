@@ -28,7 +28,7 @@ function StorePage() {
 
     if (categoryFilter) {
       result = result.filter((product) =>
-        product.category.toLowerCase().includes(categoryFilter.toLowerCase())
+        product.category.toLowerCase() === categoryFilter.toLowerCase()
       );
     }
 

@@ -1,10 +1,10 @@
 import "./ProductCard.css";
-import { Button, FlexBox, Text, Title, Toast } from "@ui5/webcomponents-react";
+import { Button, FlexBox, Text, Title } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/cart-4.js";
 import "@ui5/webcomponents-icons/dist/cart-2.js";
 import { ProductCardImage } from "../../components";
 import { useNavigate } from "react-router-dom";
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import CartContext from "../../contexts/CartContext";
 import {
   ADD_PRODUCT_TO_CART,
@@ -12,11 +12,9 @@ import {
   UPDATE_QUANTITY,
 } from "../../utils/contants";
 
-function ProductCard({ product }) {
+function ProductCard({ product, addToCartToast, removeFromCartToast }) {
   const navigate = useNavigate();
   const { dispatch, products: cartProducts } = useContext(CartContext);
-  const addToCartToast = useRef(null);
-  const removeFromCartToast = useRef(null);
 
   function showToast(toast) {
     toast.current.show();
@@ -82,12 +80,6 @@ function ProductCard({ product }) {
           </Button>
         )}
       </FlexBox>
-      <Toast ref={addToCartToast} duration={3000} placement="BottomStart">
-        Item successfully added to your cart!
-      </Toast>
-      <Toast ref={removeFromCartToast} duration={3000} placement="BottomStart">
-        Item successfully removed from your cart!
-      </Toast>
     </FlexBox>
   );
 }
