@@ -1,10 +1,10 @@
 import "./ProductCard.css";
-import { Button, FlexBox, Text, Title } from "@ui5/webcomponents-react";
+import { Button, FlexBox, Text, Title, Toast } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/cart-4.js";
 import "@ui5/webcomponents-icons/dist/cart-2.js";
 import { ProductCardImage } from "../../components";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import CartContext from "../../contexts/CartContext";
 import {
   ADD_PRODUCT_TO_CART,
@@ -15,6 +15,12 @@ import {
 function ProductCard({ product }) {
   const navigate = useNavigate();
   const { dispatch, products: cartProducts } = useContext(CartContext);
+  const addToCartToast = useRef(null);
+  const removeFromCartToast = useRef(null);
+
+  function showToast(toast) {
+    toast.current.show();
+  }
 
   return (
     <FlexBox
@@ -40,7 +46,11 @@ function ProductCard({ product }) {
             icon="cart-2"
             onClick={(event) => {
               event.stopPropagation();
-              dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: { id: product.id } });
+              dispatch({
+                type: REMOVE_PRODUCT_FROM_CART,
+                payload: { id: product.id },
+              });
+              showToast(removeFromCartToast);
             }}
           >
             Remove
@@ -50,7 +60,11 @@ function ProductCard({ product }) {
             icon="cart-4"
             onClick={(event) => {
               event.stopPropagation();
-              if (cartProducts.find((cartProduct) => cartProduct.id === product.id)) {
+              if (
+                cartProducts.find(
+                  (cartProduct) => cartProduct.id === product.id
+                )
+              ) {
                 dispatch({
                   type: UPDATE_QUANTITY,
                   payload: { id: product.id, operand: 1 },
@@ -61,12 +75,19 @@ function ProductCard({ product }) {
                 type: ADD_PRODUCT_TO_CART,
                 payload: { id: product.id, quantity: 1 },
               });
+              showToast(addToCartToast);
             }}
           >
             Add
           </Button>
         )}
       </FlexBox>
+      <Toast ref={addToCartToast} duration={3000} placement="BottomStart">
+        Item successfully added to your cart!
+      </Toast>
+      <Toast ref={removeFromCartToast} duration={3000} placement="BottomStart">
+        Item successfully removed from your cart!
+      </Toast>
     </FlexBox>
   );
 }

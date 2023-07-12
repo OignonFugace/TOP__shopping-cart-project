@@ -62,7 +62,7 @@ function CartProductItem({ id }) {
           />
         </div>
         <FlexBox direction="Column">
-          <FlexBox justifyContent="SpaceBetween">
+          <FlexBox justifyContent="SpaceBetween" style={{ gap: "1rem" }}>
             <Title wrappingType="Normal" className="cart-product-item__title">
               <Link to={`/product/${id}`} style={{ color: "black" }}>{finalProduct.title}</Link>
             </Title>

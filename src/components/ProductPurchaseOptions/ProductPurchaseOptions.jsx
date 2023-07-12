@@ -3,7 +3,7 @@ import { useState } from "react";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
 
 function ProductPurchaseOptions() {
-	const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(1);
 
   return (
     <div className="product-purchase-options">
@@ -14,9 +14,14 @@ function ProductPurchaseOptions() {
         style={{ gap: "1rem" }}
       >
         <Title level="H3">Buy Product</Title>
-				<StepInput max={30} min={1} value={1} onChange={(e) => {
-					setQuantity(e.target.value);
-				}} />
+        <StepInput
+          max={30}
+          min={1}
+          value={1}
+          onChange={(e) => {
+            setQuantity(e.target.value);
+          }}
+        />
         <AddToCartButton quantity={quantity} />
       </FlexBox>
     </div>
