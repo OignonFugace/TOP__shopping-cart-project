@@ -1,5 +1,5 @@
 
-.store-screen {
+.store-page {
 	display: grid;
 	grid-template-columns: 350px 1fr;
 }

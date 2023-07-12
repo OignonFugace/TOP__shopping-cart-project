@@ -1,0 +1,23 @@
+a,
+a:hover,
+a:active,
+a:focus {
+	text-decoration: none;
+	color: initial;
+}
+
+.navigation-menu .nav-link {
+  font-size: 2rem;
+}
+
+.navigation-menu .nav-link a:hover {
+  text-decoration: underline;
+}
+
+.navigation-menu .nav-link a:active {
+  color: #0a6ed1;
+}
+
+.navigation-menu .nav-link a.active {
+	color: #0a6ed1;
+}

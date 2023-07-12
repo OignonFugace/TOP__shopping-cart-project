@@ -42,7 +42,7 @@ function StorePage() {
   }, [searchParams, products, error, loading]);
 
   return (
-    <div className="store-screen">
+    <div className="store-page">
       <FilterSidebar />
       <ProductList
         products={filteredProducts}

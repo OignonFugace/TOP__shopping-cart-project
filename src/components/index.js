@@ -12,7 +12,6 @@ export { default as ProductCard } from "./ProductCard/ProductCard";
 export { default as Logo } from "./Logo/Logo";
 export { default as NavigationMenu } from "./NavigationMenu/NavigationMenu";
 export { default as SearchBar } from "./SearchBar/SearchBar";
-export { default as NavLink } from "./NavLink/NavLink";
 export { default as ProductCardImage } from "./ProductCardImage/ProductCardImage";
 export { default as ProductImageGallery } from "./ProductImageGallery/ProductImageGallery";
 export { default as ProductPurchaseOptions } from "./ProductPurchaseOptions/ProductPurchaseOptions";

@@ -1,0 +1,21 @@
+
+.home-page .info-section {
+	max-width: 600px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 4rem;
+}
+
+.home-page .home-page__title {
+	font-size: 3rem;
+	line-height: 1.2;
+	margin-bottom: 2rem;
+}
+
+.home-page .home-page__text {
+	font-size: 1.1rem;
+}
+
+.home-page .home-page__button {
+	margin-top: 1.7rem;
+}

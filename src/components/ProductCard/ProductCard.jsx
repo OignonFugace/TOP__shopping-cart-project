@@ -25,7 +25,7 @@ function ProductCard({ product, addToCartToast, removeFromCartToast }) {
       direction="Column"
       justifyContent="SpaceBetween"
       className="product-card"
-      onClick={() => navigate(`/product/${product.id}`)}
+      onClick={() => navigate(`/store/product/${product.id}`)}
     >
       <ProductCardImage src={product.image} title={product.title} />
       <Title

@@ -57,14 +57,14 @@ function CartProductItem({ id }) {
           <img
             src={finalProduct.image}
             alt={finalProduct.title}
-            onClick={() => navigate(`/product/${id}`)}
+            onClick={() => navigate(`/store/product/${id}`)}
             style={{ cursor: "pointer" }}
           />
         </div>
         <FlexBox direction="Column">
           <FlexBox justifyContent="SpaceBetween" style={{ gap: "1rem" }}>
             <Title wrappingType="Normal" className="cart-product-item__title">
-              <Link to={`/product/${id}`} style={{ color: "black" }}>{finalProduct.title}</Link>
+              <Link to={`/store/product/${id}`} style={{ color: "black" }}>{finalProduct.title}</Link>
             </Title>
             <Text style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
               ${finalProduct.price * itemQuantity}

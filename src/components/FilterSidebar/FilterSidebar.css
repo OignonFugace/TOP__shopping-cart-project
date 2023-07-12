@@ -1,0 +1,11 @@
+.filter-sidebar__title {
+	font-size: 1.6rem;
+}
+
+.filter-sidebar .nav-link {
+	font-size: 1.3rem;
+}
+
+.filter-sidebar .nav-link:hover {
+	text-decoration: underline;
+}

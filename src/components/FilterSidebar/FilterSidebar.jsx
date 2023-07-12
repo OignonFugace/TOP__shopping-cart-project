@@ -1,7 +1,8 @@
-import { Text } from "@ui5/webcomponents-react";
+import { Text, Title } from "@ui5/webcomponents-react";
 import { NavLink } from "react-router-dom";
 import { toTitleCase } from "../../utils/misc";
 import { useSearchParams } from "react-router-dom";
+import "./FilterSidebar.css";
 
 const categories = [
   "electronics",
@@ -33,17 +34,20 @@ function FilterSidebar() {
 
   return (
     <div className="filter-sidebar">
+      <Title className="filter-sidebar__title">Browse Categories:</Title>
       <ul>
         <li>
-          <NavLink to={createAllLink()}>
-            <Text>All</Text>
-          </NavLink>
+          <Text className="nav-link">
+            <NavLink to={createAllLink()}>All</NavLink>
+          </Text>
         </li>
         {categories.map((category) => (
           <li key={category}>
-            <NavLink to={createCategoryLink(category)}>
-              <Text>{toTitleCase(category)}</Text>
-            </NavLink>
+            <Text className="nav-link">
+              <NavLink to={createCategoryLink(category)}>
+                {toTitleCase(category)}
+              </NavLink>
+            </Text>
           </li>
         ))}
       </ul>

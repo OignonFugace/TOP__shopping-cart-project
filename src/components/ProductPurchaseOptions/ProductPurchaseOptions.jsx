@@ -1,4 +1,4 @@
-import { Title, StepInput, FlexBox } from "@ui5/webcomponents-react";
+import { Title, StepInput, FlexBox, Label } from "@ui5/webcomponents-react";
 import { useState } from "react";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
 
@@ -14,14 +14,20 @@ function ProductPurchaseOptions() {
         style={{ gap: "1rem" }}
       >
         <Title level="H3">Buy Product</Title>
-        <StepInput
-          max={30}
-          min={1}
-          value={1}
-          onChange={(e) => {
-            setQuantity(e.target.value);
-          }}
-        />
+        <FlexBox justifyContent="End" alignItems="Center" style={{gap: "1ch"}}>
+          <Label for="quantity">
+            Quantity:
+          </Label>
+          <StepInput
+						id="quantity"
+            max={30}
+            min={1}
+            value={1}
+            onChange={(e) => {
+              setQuantity(e.target.value);
+            }}
+          />
+        </FlexBox>
         <AddToCartButton quantity={quantity} />
       </FlexBox>
     </div>
