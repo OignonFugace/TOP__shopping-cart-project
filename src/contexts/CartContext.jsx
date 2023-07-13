@@ -87,7 +87,8 @@ function cartReducer(state, action) {
 
     case UPDATE_TOTAL_PRICE: {
       const totalPrice = state.products.map(product => {
-        const productPrice = action.payload.products.find(item => item.id === product.id).price;
+        const matchingProduct = action.payload.products.find(item => item.id === product.id);
+        const productPrice = matchingProduct ? matchingProduct.price : 0;
         return productPrice * product.quantity;
       }).reduce((acc, price) => acc + price, 0);
       return {
@@ -103,10 +104,7 @@ function cartReducer(state, action) {
 
 function CartContextProvider({ children }) {
   const initialState = {
-    products: [
-      { id: 1, quantity: 1 },
-      { id: 5, quantity: 1 },
-    ],
+    products: [],
     totalItems: 0,
     totalPrice: 0,
     orderStatus: "",
