@@ -52,6 +52,8 @@ function UndoToast({ type, payload, args }) {
     }
 
     case REMOVE_FROM_CART_TOAST: {
+      const toastQuantity = payload?.quantity;
+
       return (
         <Toast
           ref={removeFromCartToast}
@@ -59,9 +61,17 @@ function UndoToast({ type, payload, args }) {
           placement="BottomCenter"
         >
           <div className="cart-toast remove-from-cart-toast">
-            <Text>Item successfully removed from your cart!</Text>
+            <Text>
+              {toastQuantity === 1
+                ? "Item successfully removed from your cart!"
+                : `Successfully removed ${toastQuantity} ${
+                    toastQuantity === 1 ? "item" : "items"
+                  } from your cart!`}
+            </Text>
             <Button
               onClick={() => {
+								console.log(toastQuantity);
+								console.log("eh oh !");
                 dispatch({ type: ADD_PRODUCT_TO_CART, payload: payload });
                 setButtonDisable(true);
               }}
@@ -125,7 +135,6 @@ function UndoToast({ type, payload, args }) {
         >
           <div className="cart-toast add-to-cart-toast">
             <Text>
-              {" "}
               Successfully removed {toastQuantity}{" "}
               {toastQuantity === 1 ? "item" : "items"} from your cart!
             </Text>
