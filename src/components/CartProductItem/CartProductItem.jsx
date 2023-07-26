@@ -17,7 +17,7 @@ function CartProductItem({ id }) {
   const { data: product, loading, error } = useProductData(id);
   const { dispatch, products: cartProducts } = useContext(CartContext);
   const navigate = useNavigate();
-	const [localStorageLoaded, setLocalStorageLoaded] = useState(false);
+  const [localStorageLoaded, setLocalStorageLoaded] = useState(false);
   const [localStorageProducts, setLocalStorageProducts] = useLocalStorage(
     "products",
     []
@@ -33,7 +33,7 @@ function CartProductItem({ id }) {
         return [...prevLocalStorageProducts, product];
       });
     }
-		setLocalStorageLoaded(true);
+    setLocalStorageLoaded(true);
   }, [product]);
 
   const finalProduct =
@@ -64,7 +64,9 @@ function CartProductItem({ id }) {
         <FlexBox direction="Column">
           <FlexBox justifyContent="SpaceBetween" style={{ gap: "1rem" }}>
             <Title wrappingType="Normal" className="cart-product-item__title">
-              <Link to={`/store/product/${id}`} style={{ color: "black" }}>{finalProduct.title}</Link>
+              <Link to={`/store/product/${id}`} style={{ color: "black" }}>
+                {finalProduct.title}
+              </Link>
             </Title>
             <Text style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
               ${finalProduct.price * itemQuantity}
@@ -89,15 +91,14 @@ function CartProductItem({ id }) {
           <Icon className="cart-item___icon" name="add" />
         </div>
         <div
+          className={itemQuantity === 1 ? "disabled" : ""}
           onClick={() => {
-            if (itemQuantity === 1) {
-              dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: { id: id } });
-              return;
+            if (itemQuantity !== 1) {
+              dispatch({
+                type: UPDATE_QUANTITY,
+                payload: { id: id, operand: -1 },
+              });
             }
-            dispatch({
-              type: UPDATE_QUANTITY,
-              payload: { id: id, operand: -1 },
-            });
           }}
         >
           <Icon className="cart-item___icon" name="less" />
