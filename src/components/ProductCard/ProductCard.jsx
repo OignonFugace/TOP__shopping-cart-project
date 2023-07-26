@@ -16,7 +16,8 @@ import ToastContext from "../../contexts/ToastContext";
 function ProductCard({ product }) {
   const navigate = useNavigate();
   const { dispatch, products: cartProducts } = useContext(CartContext);
-  const { addToCartToast, removeFromCartToast, showToast } = useContext(ToastContext);
+  const { addToCartToast, removeFromCartToast, showToast } =
+    useContext(ToastContext);
 
   return (
     <FlexBox
@@ -48,7 +49,10 @@ function ProductCard({ product }) {
                 type: REMOVE_PRODUCT_FROM_CART,
                 payload: { id: product.id },
               });
-              showToast(removeFromCartToast);
+              showToast(removeFromCartToast, {
+                id: product.id,
+                quantity: cartProducts.find((cartProduct) => cartProduct.id === product.id).quantity,
+              });
             }}
           >
             Remove
@@ -73,7 +77,9 @@ function ProductCard({ product }) {
                 type: ADD_PRODUCT_TO_CART,
                 payload: { id: product.id, quantity: 1 },
               });
-              showToast(addToCartToast);
+              showToast(addToCartToast, {
+                id: product.id,
+              });
             }}
           >
             Add

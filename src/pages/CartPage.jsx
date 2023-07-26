@@ -7,9 +7,11 @@ import { CLEAR_CART } from "../utils/contants";
 import "@ui5/webcomponents-icons/dist/credit-card.js";
 import "@ui5/webcomponents-icons/dist/basket.js";
 import { useNavigate } from "react-router-dom";
+import ToastContext from "../contexts/ToastContext";
 
 function CartPage() {
   const navigate = useNavigate();
+  const { showToast, clearCartToast } = useContext(ToastContext);
   const {
     dispatch,
     products: cartProcucts,
@@ -23,7 +25,10 @@ function CartPage() {
         <>
           <FlexBox alignItems="Center" justifyContent="SpaceBetween">
             <Title>Shopping Cart</Title>
-            <Button onClick={() => dispatch({ type: CLEAR_CART })}>
+            <Button onClick={() => {
+              dispatch({ type: CLEAR_CART });
+              showToast(clearCartToast, {}, cartProcucts);
+            }}>
               Clear Cart
             </Button>
           </FlexBox>

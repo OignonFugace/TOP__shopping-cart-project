@@ -13,10 +13,13 @@ import {
 import { useNavigate, Link } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import Price from "../Price/Price";
+import ToastContext from "../../contexts/ToastContext";
 
 function CartProductItem({ id }) {
   const { data: product, loading, error } = useProductData(id);
   const { dispatch, products: cartProducts } = useContext(CartContext);
+  const { showToast, deleteCartItemToast, clearCartToast } =
+    useContext(ToastContext);
   const navigate = useNavigate();
   const [localStorageLoaded, setLocalStorageLoaded] = useState(false);
   const [localStorageProducts, setLocalStorageProducts] = useLocalStorage(
@@ -105,9 +108,14 @@ function CartProductItem({ id }) {
           <Icon className="cart-item___icon" name="less" />
         </div>
         <div
-          onClick={() =>
-            dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: { id: id } })
-          }
+          onClick={() => {
+            dispatch({ type: REMOVE_PRODUCT_FROM_CART, payload: { id: id } });
+            showToast(
+              deleteCartItemToast,
+              { id: id, quantity: itemQuantity },
+              { toastQuantity: itemQuantity }
+            );
+          }}
         >
           <Icon className="cart-item___icon" name="delete" />
         </div>

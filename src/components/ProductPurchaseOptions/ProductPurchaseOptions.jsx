@@ -14,12 +14,14 @@ function ProductPurchaseOptions() {
         style={{ gap: "1rem" }}
       >
         <Title level="H3">Buy Product</Title>
-        <FlexBox justifyContent="End" alignItems="Center" style={{gap: "1ch"}}>
-          <Label for="quantity">
-            Quantity:
-          </Label>
+        <FlexBox
+          justifyContent="End"
+          alignItems="Center"
+          style={{ gap: "1ch" }}
+        >
+          <Label for="quantity">Quantity:</Label>
           <StepInput
-						id="quantity"
+            id="quantity"
             max={30}
             min={1}
             value={1}

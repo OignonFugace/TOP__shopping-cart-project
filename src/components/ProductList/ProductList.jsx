@@ -1,7 +1,6 @@
 import { Text, Title } from "@ui5/webcomponents-react";
 import ProductCard from "../ProductCard/ProductCard";
 import "./ProductList.css";
-import "@ui5/webcomponents-icons/dist/undo.js";
 
 function ProductList({ products, loading, error, localStorageProducts }) {
   if (loading && !localStorageProducts.length) return <Text>Loading...</Text>;

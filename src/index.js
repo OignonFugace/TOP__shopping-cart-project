@@ -14,11 +14,11 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ToastContextProvider>
-        <CartContextProvider>
+      <CartContextProvider>
+        <ToastContextProvider>
           <App />
-        </CartContextProvider>
-      </ToastContextProvider>
+        </ToastContextProvider>
+      </CartContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
