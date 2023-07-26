@@ -1,7 +1,7 @@
 import { Text, Title, FlexBox, Button } from "@ui5/webcomponents-react";
 import { useContext } from "react";
 import "../assets/css/CartPage.css";
-import { CartProductList } from "../components";
+import { CartProductList, Price } from "../components";
 import CartContext from "../contexts/CartContext";
 import { CLEAR_CART } from "../utils/contants";
 import "@ui5/webcomponents-icons/dist/credit-card.js";
@@ -30,7 +30,7 @@ function CartPage() {
           <CartProductList />
           <Text style={{ fontSize: "1.1rem", textAlign: "right" }}>
             <span>Total ({totalItems} Items): </span>
-            <span style={{ fontWeight: "bold" }}>${totalPrice}</span>
+            <span style={{ fontWeight: "bold" }}><Price value={totalPrice} /></span>
           </Text>
           <FlexBox justifyContent="End">
             <Button

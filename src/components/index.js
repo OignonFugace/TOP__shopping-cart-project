@@ -17,3 +17,4 @@ export { default as ProductImageGallery } from "./ProductImageGallery/ProductIma
 export { default as ProductPurchaseOptions } from "./ProductPurchaseOptions/ProductPurchaseOptions";
 export { default as CartProductItem } from "./CartProductItem/CartProductItem";
 export { default as CartProductList } from "./CartProductList/CartProductList";
+export { default as Price } from "./Price/Price";

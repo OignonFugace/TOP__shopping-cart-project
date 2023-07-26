@@ -2,7 +2,7 @@ import "./ProductCard.css";
 import { Button, FlexBox, Text, Title } from "@ui5/webcomponents-react";
 import "@ui5/webcomponents-icons/dist/cart-4.js";
 import "@ui5/webcomponents-icons/dist/cart-2.js";
-import { ProductCardImage } from "../../components";
+import { Price, ProductCardImage } from "../../components";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import CartContext from "../../contexts/CartContext";
@@ -38,7 +38,9 @@ function ProductCard({ product, addToCartToast, removeFromCartToast }) {
         {product.title}
       </Title>
       <FlexBox justifyContent="SpaceBetween" alignItems="Center">
-        <Text>${product.price}</Text>
+        <Text className="displayed-price">
+          <Price value={product.price} />
+        </Text>
         {cartProducts.find((cartProduct) => cartProduct.id === product.id) ? (
           <Button
             icon="cart-2"

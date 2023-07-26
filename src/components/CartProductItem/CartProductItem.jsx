@@ -12,6 +12,7 @@ import {
 } from "../../utils/contants";
 import { useNavigate, Link } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import Price from "../Price/Price";
 
 function CartProductItem({ id }) {
   const { data: product, loading, error } = useProductData(id);
@@ -69,7 +70,7 @@ function CartProductItem({ id }) {
               </Link>
             </Title>
             <Text style={{ fontWeight: "bold", fontSize: "1.1rem" }}>
-              ${finalProduct.price * itemQuantity}
+              <Price value={finalProduct.price * itemQuantity} />
             </Text>
           </FlexBox>
           <Text style={{ textAlign: "right" }}>

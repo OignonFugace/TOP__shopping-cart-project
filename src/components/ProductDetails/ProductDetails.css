@@ -1,0 +1,10 @@
+.product-details {
+	display: grid;
+	gap: 1rem;
+	align-content: start;
+}
+
+.product-details .displayed-price {
+	justify-self: end;
+	font-size: 1.1rem;
+}
