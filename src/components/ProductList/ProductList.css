@@ -7,3 +7,10 @@
 .product-list-screen .no-product-message__text {
   font-size: 1.1rem;
 }
+
+.cart-toast {
+  display: flex;
+  flex-direction: column;
+  gap: 1ch;
+  text-align: center;
+}

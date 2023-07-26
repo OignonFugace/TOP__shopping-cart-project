@@ -11,14 +11,12 @@ import {
   REMOVE_PRODUCT_FROM_CART,
   UPDATE_QUANTITY,
 } from "../../utils/contants";
+import ToastContext from "../../contexts/ToastContext";
 
-function ProductCard({ product, addToCartToast, removeFromCartToast }) {
+function ProductCard({ product }) {
   const navigate = useNavigate();
   const { dispatch, products: cartProducts } = useContext(CartContext);
-
-  function showToast(toast) {
-    toast.current.show();
-  }
+  const { addToCartToast, removeFromCartToast, showToast } = useContext(ToastContext);
 
   return (
     <FlexBox

@@ -18,3 +18,4 @@ export { default as ProductPurchaseOptions } from "./ProductPurchaseOptions/Prod
 export { default as CartProductItem } from "./CartProductItem/CartProductItem";
 export { default as CartProductList } from "./CartProductList/CartProductList";
 export { default as Price } from "./Price/Price";
+export { default as UndoToast } from "./UndoToast/UndoToast";
